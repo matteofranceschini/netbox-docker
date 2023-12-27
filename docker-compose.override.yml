@@ -28,7 +28,7 @@ volumes:
      driver_opts:
        o: bind
        type: none
-       device: /dockerFiles/netbox
+       device: /dockerFiles/netbox/netbox-docker
   nb-media:
      driver: local
      driver_opts:
