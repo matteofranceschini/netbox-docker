@@ -1,0 +1,49 @@
+version: '3.4'
+services:
+  netbox:
+    ports:
+    - 8080:8080
+    volumes:
+    - nb-config:/etc/netbox/config:z,ro
+    - nb-media:/opt/netbox/netbox/media:z,rw
+    - nb-reports:/opt/netbox/netbox/reports:z,rw
+    - nb-scripts:/opt/netbox/netbox/scripts:z,rw
+    healthcheck:
+      retries: 15
+  netbox-worker:
+    volumes:
+    - nb-config:/etc/netbox/config:z,ro
+    - nb-media:/opt/netbox/netbox/media:z,rw
+    - nb-reports:/opt/netbox/netbox/reports:z,rw
+    - nb-scripts:/opt/netbox/netbox/scripts:z,rw
+  netbox-housekeeping:
+    volumes:
+    - nb-config:/etc/netbox/config:z,ro
+    - nb-media:/opt/netbox/netbox/media:z,rw
+    - nb-reports:/opt/netbox/netbox/reports:z,rw
+    - nb-scripts:/opt/netbox/netbox/scripts:z,rw
+volumes:
+  nb-config:
+     driver: local
+     driver_opts:
+       o: bind
+       type: none
+       device: /dockerFiles/netbox
+  nb-media:
+     driver: local
+     driver_opts:
+       o: bind
+       type: none
+       device: /dockerFiles/netbox/media
+  nb-reports:
+     driver: local
+     driver_opts:
+       o: bind
+       type: none
+       device: /dockerFiles/netbox/reports
+  nb-scripts:
+     driver: local
+     driver_opts:
+       o: bind
+       type: none
+       device: /dockerFiles/netbox/scripts
